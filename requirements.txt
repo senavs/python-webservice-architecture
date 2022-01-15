@@ -1,0 +1,9 @@
+autopep8==1.6.0
+black==21.12b0
+fastapi==0.71.0
+flake8==4.0.1
+isort==5.10.1
+mypy==0.931
+pydantic==1.9.0
+starlette==0.17.1
+uvicorn==0.17.0
