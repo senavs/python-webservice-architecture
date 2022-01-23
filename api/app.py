@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
 from . import __version__
-from .exceptions import handlers
+from .exceptions.handlers import exception_handlers
 from .middlewares import RequestTimeMiddleware
-from .routes import health
+from .routes import health, v1
 
 
 def create_app() -> FastAPI:
@@ -11,17 +11,13 @@ def create_app() -> FastAPI:
         title="FastAPI Architecture",
         description="Base FastAPI architecture for future projects",
         version=__version__,
+        exception_handlers=exception_handlers
     )
 
-    register_exception_handlers(app)
     register_middlewares(app)
     register_routes(app)
 
     return app
-
-
-def register_exception_handlers(app: FastAPI):
-    app.add_exception_handler(handlers.RequestValidationError, handlers.validation_error)
 
 
 def register_middlewares(app: FastAPI):
@@ -30,3 +26,4 @@ def register_middlewares(app: FastAPI):
 
 def register_routes(app: FastAPI):
     app.include_router(health.router)
+    app.include_router(v1.router)
