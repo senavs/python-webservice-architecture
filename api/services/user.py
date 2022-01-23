@@ -1,6 +1,6 @@
 from ..database import UserModel
 from ..database.repositories.user import UserSearchRepository, UserCreateRepository, UserUpdateRepository
-from ..exceptions.user import UserNotFoundError
+from ..exception.user import UserNotFoundError
 from ..schemas.user import UserModelSchema
 
 

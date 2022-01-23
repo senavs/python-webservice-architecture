@@ -1,0 +1,29 @@
+@startuml
+
+package "Entrypoints" {
+    [Error Handlers] <-- [Routes]
+    [Payloads] <- [Routes]
+    [Routes] -> [Middlewares]
+}
+
+package "Use Cases" {
+    [Services] -> [Modules]
+    [Schemas] <- [Services]
+
+    [Routes] <--- [Services]
+    [Payloads] ... [Schemas]
+}
+
+package "External Entrypoints" {
+    [Modules] <--- [Clients]
+}
+
+database "Database" {
+    [Models] <- [Repositories]
+
+    [Modules] <--- [Repositories]
+    [Services] <--- [Repositories]
+    [Schemas] ... [Models]
+}
+
+@enduml

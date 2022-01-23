@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from . import BaseRepository, BaseCRUDRepository
 from .. import UserModel
 from ..session import inject_session
-from ...exceptions.user import UserNotFoundError, UserAlreadyRegisterError
+from ...exception.user import UserNotFoundError, UserAlreadyRegisterError
 
 
 class UserCRUDRepository(BaseCRUDRepository):
