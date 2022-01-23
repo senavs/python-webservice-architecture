@@ -11,7 +11,7 @@ def create_app() -> FastAPI:
         title="FastAPI Architecture",
         description="Base FastAPI architecture for future projects",
         version=__version__,
-        exception_handlers=exception_handlers
+        exception_handlers=exception_handlers,
     )
 
     register_middlewares(app)

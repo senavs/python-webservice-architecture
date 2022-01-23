@@ -1,6 +1,6 @@
 from ..database import UserModel
-from ..database.repositories.user import UserCRUDRepository, UserSearchRepository
-from ..exceptions.user import UserNotFoundError, UserAlreadyRegisterError
+from ..database.repositories.user import UserSearchRepository, UserCreateRepository, UserUpdateRepository
+from ..exceptions.user import UserNotFoundError
 from ..schemas.user import UserModelSchema
 
 
@@ -11,12 +11,14 @@ def search_user(username: str = None, email: str = None) -> UserModelSchema:
     if not user:
         raise UserNotFoundError
 
-    return user
+    return UserModelSchema.from_orm(user)
 
 
 def create_user(username: str, email: str) -> UserModelSchema:
-    if UserSearchRepository.search_by_username_or_email(username=username, email=email):
-        raise UserAlreadyRegisterError
+    user = UserCreateRepository.create_new_user(username=username, email=email)
+    return UserModelSchema.from_orm(user)
 
-    user: UserModel = UserCRUDRepository.insert(username=username, email=email)
+
+def update_user_email(username: str, new_email: str) -> UserModelSchema:
+    user = UserUpdateRepository.update_user_email(username=username, new_email=new_email)
     return UserModelSchema.from_orm(user)
