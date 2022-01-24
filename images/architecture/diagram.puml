@@ -6,11 +6,17 @@ package "Entrypoints" {
     [Routes] -> [Middlewares]
 }
 
+package "Errors" {
+    [Exception]
+}
+
 package "Use Cases" {
     [Services] -> [Modules]
     [Schemas] <- [Services]
 
     [Routes] <--- [Services]
+    [Exception] <- [Services]
+    [Exception] <- [Modules]
     [Payloads] ... [Schemas]
 }
 
@@ -23,6 +29,7 @@ database "Database" {
 
     [Modules] <--- [Repositories]
     [Services] <--- [Repositories]
+    [Exception] <-- [Repositories]
     [Schemas] ... [Models]
 }
 
