@@ -2,9 +2,9 @@
 
 Base Python3 webservice architecture for future projects.
 
-## Object
+## Objective
 
-The main object of this architecture is split all components into 5 parts and remove
+The main objective of this architecture is split all components into 5 parts and remove
 correlation between them.
 
 Be side that, detach the entrypoint layer from the others so that we can easily change
