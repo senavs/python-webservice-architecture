@@ -5,9 +5,9 @@ from ...payloads.v1.user import (
     CreateUserRequest,
     UpdateUserRequest,
     UpdateUserResponse,
-    SearchUserResponse,
+    SearchUserResponse, ListUserResponse,
 )
-from ...services.user import create_user, search_user, update_user_email
+from ...services.user import create_user, search_user, update_user_email, list_all_users
 
 router = APIRouter(prefix="/users", tags=["User"])
 
@@ -25,3 +25,8 @@ def _create_user(body: CreateUserRequest):
 @router.put("/", summary="Update user email", response_model=UpdateUserResponse)
 def _update_user(body: UpdateUserRequest):
     return update_user_email(username=body.username, new_email=body.new_email)
+
+
+@router.get("/all", summary="List all users", response_model=ListUserResponse)
+def _list_all_users():
+    return list_all_users()

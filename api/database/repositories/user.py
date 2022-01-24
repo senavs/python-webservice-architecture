@@ -18,6 +18,11 @@ class UserSearchRepository(BaseRepository):
 
     @classmethod
     @inject_session
+    def list_all(cls, *, session: Session = None) -> list[UserModel]:
+        return session.query(cls._table).all()
+
+    @classmethod
+    @inject_session
     def search_by_username(cls, username: str, *, session: Session = None) -> Optional[UserModel]:
         return session.query(cls._table).filter(cls._table.username == username).first()
 

@@ -1,9 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from ...schemas.user import UserModelSchema
 
 
-class SearchUserResponse(UserModelSchema):
+class UserSchema(UserModelSchema):
+    id_user: int = Field(alias="idUser")
+
+
+class SearchUserResponse(UserSchema):
     """Response payload for /v1/users GET"""
 
 
@@ -14,7 +18,10 @@ class CreateUserRequest(BaseModel):
     email: str
 
 
-class CreateUserResponse(UserModelSchema):
+ListUserResponse = list[SearchUserResponse]
+
+
+class CreateUserResponse(UserSchema):
     """Response payload for /v1/users POST"""
 
 
@@ -22,8 +29,8 @@ class UpdateUserRequest(BaseModel):
     """Request payload for /v1/users PUT"""
 
     username: str
-    new_email: str
+    new_email: str = Field(alias="newEmail")
 
 
-class UpdateUserResponse(UserModelSchema):
+class UpdateUserResponse(UserSchema):
     """Response payload for /v1/users PUT"""

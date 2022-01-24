@@ -4,10 +4,15 @@ from ..exception.user import UserNotFoundError
 from ..schemas.user import UserModelSchema
 
 
+def list_all_users() -> list[UserModelSchema]:
+    users = UserSearchRepository.list_all()
+    return [UserModelSchema.from_orm(user) for user in users]
+
+
 def search_user(username: str = None, email: str = None) -> UserModelSchema:
     assert bool(username) != bool(email), "select username or email filter, not both and at least one"
 
-    user: UserModel = UserSearchRepository.search_by_username_or_email(username=username, email=email)
+    user = UserSearchRepository.search_by_username_or_email(username=username, email=email)
     if not user:
         raise UserNotFoundError
 
