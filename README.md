@@ -17,6 +17,8 @@ See [components](#components) session for more information.
 
 ## Components
 
+The HTTP Layer 
+
 ![architecture diagram](images/architecture/diagram.png)
 
 ## How to use
