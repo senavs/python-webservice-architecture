@@ -29,11 +29,11 @@ def inject_session(func: Callable):
     def wrapper(*args, **kwargs):
         current_session = kwargs.pop("session", None)
         if current_session:
-            session = current_session
-        else:
-            session = create_session()
-            session.expire_on_commit = False
-            session.begin()
+            return func(*args, **kwargs, session=current_session)
+
+        session = create_session()
+        session.expire_on_commit = False
+        session.begin()
 
         try:
             resp = func(*args, **kwargs, session=current_session or session)

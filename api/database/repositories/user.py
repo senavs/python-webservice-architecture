@@ -46,7 +46,7 @@ class UserCreateRepository(BaseRepository):
         if UserSearchRepository.search_by_username_or_email(username=username, email=email, session=session):
             raise UserAlreadyRegisterError
 
-        user: UserModel = UserCRUDRepository.insert(username=username, email=email, session=session, commit=True)
+        user: UserModel = UserCRUDRepository.insert(username=username, email=email, session=session)
         return user
 
 
@@ -63,5 +63,5 @@ class UserUpdateRepository(BaseRepository):
         if UserSearchRepository.search_by_email(email=new_email, session=session):
             raise UserAlreadyRegisterError
 
-        UserCRUDRepository.update(user, email=new_email, session=session, commit=True)
+        UserCRUDRepository.update(user, email=new_email, session=session)
         return user

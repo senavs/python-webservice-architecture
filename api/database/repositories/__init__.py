@@ -17,19 +17,17 @@ class BaseCRUDRepository(BaseRepository):
         return session.query(cls._table).get(id)
 
     @classmethod
-    def insert(cls, *, session: Session, commit: bool, **kwargs) -> DeclarativeBase:
+    def insert(cls, *, session: Session, **kwargs) -> DeclarativeBase:
         record = cls._table(**kwargs)
 
         session.add(record)
-        if commit:
-            session.commit()
-            session.flush()
+        session.flush()
 
         return record
 
     @classmethod
     def update(
-        cls, record: DeclarativeBase, *, session: Session, commit: bool, exclude_none: bool = True, **kwargs
+        cls, record: DeclarativeBase, *, session: Session, exclude_none: bool = True, **kwargs
     ) -> DeclarativeBase:
         for col, value in kwargs.items():
             if not hasattr(record, col):
@@ -38,16 +36,12 @@ class BaseCRUDRepository(BaseRepository):
                 continue
             setattr(record, col, value)
 
-        if commit:
-            session.commit()
-            session.flush()
+        session.flush()
 
         return record
 
     @classmethod
-    def delete(cls, record: DeclarativeBase, *, session: Session, commit: bool):
+    def delete(cls, record: DeclarativeBase, *, session: Session):
         session.delete(record)
 
-        if commit:
-            session.commit()
-            session.flush()
+        session.flush()

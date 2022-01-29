@@ -5,7 +5,8 @@ from ...payloads.v1.user import (
     CreateUserRequest,
     UpdateUserRequest,
     UpdateUserResponse,
-    SearchUserResponse, ListUserResponse,
+    SearchUserResponse,
+    ListUserResponse,
 )
 from ...services.user import create_user, search_user, update_user_email, list_all_users
 
