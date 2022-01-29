@@ -1,6 +1,6 @@
-from ..database import UserModel
 from ..database.repositories.user import UserSearchRepository, UserCreateRepository, UserUpdateRepository
 from ..exception.user import UserNotFoundError
+from ..modules.user import is_valid_email
 from ..schemas.user import UserModelSchema
 
 
@@ -20,10 +20,14 @@ def search_user(username: str = None, email: str = None) -> UserModelSchema:
 
 
 def create_user(username: str, email: str) -> UserModelSchema:
+    assert is_valid_email(email), "invalid email"
+
     user = UserCreateRepository.create_new_user(username=username, email=email)
     return UserModelSchema.from_orm(user)
 
 
 def update_user_email(username: str, new_email: str) -> UserModelSchema:
+    assert is_valid_email(new_email), "invalid email"
+
     user = UserUpdateRepository.update_user_email(username=username, new_email=new_email)
     return UserModelSchema.from_orm(user)
