@@ -1,9 +1,21 @@
 @startuml
 
 package "Entrypoints" {
-    [Error Handlers] <-- [Routes]
-    [Payloads] <- [Routes]
-    [Routes] -> [Middlewares]
+
+    package "HTTP" {
+        [Error Handlers] <-- [Routes]
+        [Payloads] <- [Routes]
+        [Routes] -> [Middlewares]
+   }
+
+   package "Queue" {
+        [Consumer]
+   }
+
+   package "GRPC" {
+        [Server/Client]
+   }
+
 }
 
 package "Errors" {
@@ -15,6 +27,8 @@ package "Use Cases" {
     [Schemas] <- [Services]
 
     [Routes] <--- [Services]
+    [Consumer] <----- [Services]
+    [Server/Client] <----- [Services]
     [Exception] <- [Services]
     [Exception] <- [Modules]
     [Payloads] ... [Schemas]
