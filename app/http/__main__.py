@@ -1,8 +1,8 @@
 import uvicorn
 
-from api.app import create_app
-from api.database.loader import create_all
-from api.settings import deploy_settings
+from app.http.app import create_app
+from app.settings import deploy_settings
+from app.src.database.loader import create_all
 
 app = create_app()
 create_all()

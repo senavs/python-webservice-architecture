@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from ...schemas.user import UserModelSchema
+from app.src.schemas.user import UserModelSchema
 
 
 class UserSchema(UserModelSchema):

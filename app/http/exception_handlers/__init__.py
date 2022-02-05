@@ -1,13 +1,14 @@
 from fastapi.exceptions import RequestValidationError
 
+from app.src.exception import BadRequestException, NotFoundException
+
 from .assertion import assertion_error
-from .http import http_exception
+from .http import http_exception_factory
 from .validation import validation_error
-from ..exception import BadRequestException, NotFoundException
 
 exception_handlers = {
     AssertionError: assertion_error,
-    BadRequestException: http_exception,
-    NotFoundException: http_exception,
     RequestValidationError: validation_error,
+    BadRequestException: http_exception_factory(400),
+    NotFoundException: http_exception_factory(404),
 }

@@ -1,4 +1,4 @@
-from . import NotFoundException, BadRequestException
+from . import BadRequestException, NotFoundException
 
 
 class UserNotFoundError(NotFoundException):

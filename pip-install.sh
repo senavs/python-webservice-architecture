@@ -1,6 +1,6 @@
-REQUIREMENTS_FILE=api/requirements.txt
+REQUIREMENTS_FILE=app/requirements.txt
 if [[ $2 == '--dev' ]]; then
-  REQUIREMENTS_FILE=api/requirements-dev.txt
+  REQUIREMENTS_FILE=app/requirements-dev.txt
 fi
 
 pip install $1 && \

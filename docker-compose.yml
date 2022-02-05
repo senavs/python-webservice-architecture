@@ -4,14 +4,14 @@ services:
 
   app:
     build:
-      context: api
+      context: app
       dockerfile: Dockerfile
     environment:
       - POSTGRES_HOST=database
     ports:
       - "8080:8080"
     volumes:
-      - ./api:/opt/api
+      - ./app:/opt/app
     depends_on:
       - database
 

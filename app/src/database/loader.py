@@ -1,4 +1,4 @@
-from api.database import DeclarativeBase, engine
+from app.src.database import DeclarativeBase, engine
 
 
 def create_all(reset: bool = False):

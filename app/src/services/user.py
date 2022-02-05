@@ -1,7 +1,7 @@
-from ..database.repositories.user import UserSearchRepository, UserCreateRepository, UserUpdateRepository
-from ..exception.user import UserNotFoundError
-from ..modules.user import is_valid_email
-from ..schemas.user import UserModelSchema
+from app.src.database.repositories.user import UserCreateRepository, UserSearchRepository, UserUpdateRepository
+from app.src.exception.user import UserNotFoundError
+from app.src.modules.user import is_valid_email
+from app.src.schemas.user import UserModelSchema
 
 
 def list_all_users() -> list[UserModelSchema]:

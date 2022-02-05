@@ -3,10 +3,11 @@ from typing import Optional
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
-from . import BaseRepository, BaseCRUDRepository
+from app.src.exception.user import UserAlreadyRegisterError, UserNotFoundError
+
 from .. import UserModel
 from ..session import inject_session
-from ...exception.user import UserNotFoundError, UserAlreadyRegisterError
+from . import BaseCRUDRepository, BaseRepository
 
 
 class UserCRUDRepository(BaseCRUDRepository):

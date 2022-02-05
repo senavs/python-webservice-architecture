@@ -1,14 +1,15 @@
 from fastapi import APIRouter
 
+from app.src.services.user import create_user, list_all_users, search_user, update_user_email
+
 from ...payloads.v1.user import (
-    CreateUserResponse,
     CreateUserRequest,
+    CreateUserResponse,
+    ListUserResponse,
+    SearchUserResponse,
     UpdateUserRequest,
     UpdateUserResponse,
-    SearchUserResponse,
-    ListUserResponse,
 )
-from ...services.user import create_user, search_user, update_user_email, list_all_users
 
 router = APIRouter(prefix="/users", tags=["User"])
 
