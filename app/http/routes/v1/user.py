@@ -1,6 +1,12 @@
 from fastapi import APIRouter
 
-from app.src.services.user import create_user, list_all_users, search_user, update_user_email
+from app.src.services.user import (
+    create_user,
+    list_all_users,
+    search_user_by_email,
+    search_user_by_username,
+    update_user_email,
+)
 
 from ...payloads.v1.user import (
     CreateUserRequest,
@@ -16,7 +22,11 @@ router = APIRouter(prefix="/users", tags=["User"])
 
 @router.get("/", summary="Search for user", response_model=SearchUserResponse)
 def _search_user(username: str = None, email: str = None):
-    return search_user(username=username, email=email)
+    assert bool(username) != bool(email), "select username or email filter, not both and at least one"
+
+    if username:
+        return search_user_by_username(username)
+    return search_user_by_email(email)
 
 
 @router.post("/", summary="Create new user", response_model=CreateUserResponse)

@@ -9,10 +9,16 @@ def list_all_users() -> list[UserModelSchema]:
     return [UserModelSchema.from_orm(user) for user in users]
 
 
-def search_user(username: str = None, email: str = None) -> UserModelSchema:
-    assert bool(username) != bool(email), "select username or email filter, not both and at least one"
+def search_user_by_username(username: str) -> UserModelSchema:
+    user = UserSearchRepository.search_by_username(username=username)
+    if not user:
+        raise UserNotFoundError
 
-    user = UserSearchRepository.search_by_username_or_email(username=username, email=email)
+    return UserModelSchema.from_orm(user)
+
+
+def search_user_by_email(email: str) -> UserModelSchema:
+    user = UserSearchRepository.search_by_username(email=email)
     if not user:
         raise UserNotFoundError
 
