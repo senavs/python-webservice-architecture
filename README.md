@@ -61,6 +61,6 @@ If a swagger page is opened, it's done!
 
 ## Components
 
-![architecture diagram](images/architecture/diagram.png)
+![architecture diagram](_images/architecture/diagram.png)
 
 ## How to add new features
